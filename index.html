@@ -167,7 +167,8 @@ Loading... 🕗
 
 
 .footnote[https://docs.python.org/3/library/itertools.html#itertools.cycle]
-
+???
+how it is a great tool, when writing command line tools.
 ---
 name: count
 layout: false
@@ -270,7 +271,9 @@ DataClasses are simply containers of data.
 - **unsafe_hash:** Force the addition of a .__hash__() method? (Default is False.)
 
  ]
+???
 
+- Emphasize on the immutability
 ---
 
 .left-column[
@@ -307,7 +310,12 @@ Equal? True
 ```
 ]
 .footnote[https://docs.python.org/3/library/dataclasses.html#module-dataclasses]
-
+???
+- Talk about the importance of Type Hints and Named Parameters
+For
+Integrity -  type hints,
+Readability -  named parameters.
+Simplicity - less boiler plate code
 ---
 name: decorators
 
@@ -366,8 +374,12 @@ Hello, World!
 
 Not Authorized
 ```
-
 ]
+
+???
+Makes code readable, at the same time the implementation is explicit. I
+like that I could do this that is not part of a framework.
+
 ---
 name: graceful-shutdown
 
@@ -386,6 +398,10 @@ You don’t have to handle the SIGTERM within your application.
 > gunicorn "src:app() --graceful-timeout 10"
 ```
 ]
+???
+
+Talk about SIGKILL and SIGTERM,
+CF timeout 10 seconds.
 ---
 .left-column[
 ## Graceful Shutdown
@@ -463,9 +479,6 @@ ApplicationListener<ContextClosedEvent> {
 
 ```
 ]
-
-
-
 ---
 
 template: inverse
