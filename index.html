@@ -4,42 +4,521 @@
     <title>Title</title>
     <meta charset="utf-8">
     <style>
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
       @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
-      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
       @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
 
-      body { font-family: 'Droid Serif'; }
+      body {
+        font-family: 'Droid Serif';
+      }
       h1, h2, h3 {
         font-family: 'Yanone Kaffeesatz';
-        font-weight: normal;
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 3em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
       }
       .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .pull-left {
+        float: left;
+        width: 47%;
+      }
+      .pull-right {
+        float: right;
+        width: 47%;
+      }
+      .pull-right ~ p {
+        clear: both;
+      }
+      #slideshow .slide .content code {
+        font-size: 0.8em;
+      }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+
+      /* Slide-specific styling */
+      #slide-inverse .footnote {
+        bottom: 12px;
+        left: 20px;
+      }
+      #slide-how .slides {
+        font-size: 0.9em;
+        position: absolute;
+        top:  151px;
+        right: 140px;
+      }
+      #slide-how .slides h3 {
+        margin-top: 0.2em;
+      }
+      #slide-how .slides .first, #slide-how .slides .second {
+        padding: 1px 20px;
+        height: 90px;
+        width: 120px;
+        -moz-box-shadow: 0 0 10px #777;
+        -webkit-box-shadow: 0 0 10px #777;
+        box-shadow: 0 0 10px #777;
+      }
+      #slide-how .slides .first {
+        background: #fff;
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        z-index: 1;
+      }
+      #slide-how .slides .second {
+        position: relative;
+        background: #fff;
+        z-index: 0;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 20%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column {
+        width: 75%;
+        float: right;
+        padding-top: 1em;
+      }
     </style>
   </head>
   <body>
-    <textarea id="source">
+<textarea id="source">
 
-class: center, middle
+name: about-me
+layout: false
+# About Me
 
-# Title
+I...
+
+- am **Syamala Umamaheswaran**
+- work for **Volkswagen Digital:Lab Berlin**
+- like a good discussion around **Test Driven Development**, **Pair Programming**, **Java vs Kotlin**, **Software architectures**, **OAuth2**, **Spring Framework** ...
+- occasionally blog @ https://dev.to/shyamala_u
+- am fairly active in twitter @shyamala_u
+---
+name: inverse
+layout: true
+class: center, middle, inverse
+---
+#In my Rendezvous with Python
+---
+name: cycle
+layout: false
+
+.left-column[
+  ## cycle
+]
+
+.right-column[
+
+Make an iterator returning elements from the iterable and saving a copy of each.
+When the iterable is exhausted, return elements from the saved copy. Repeats indefinitely
+
+```python
+clocks = ['🕛', '🕑', '🕓', '🕕', '🕗', '🕘', '🕚']
+`clock = cycle(clocks)`
+msg = 'Loading... '
+for i in range(10):
+    print('\r' + msg + next(clock), end='')
+    sleep(1)
+```
+
+Output:
+
+```bash
+Loading... 🕗
+```
+]
+
+
+.footnote[https://docs.python.org/3/library/itertools.html#itertools.cycle]
+
+---
+name: count
+layout: false
+
+.left-column[
+  ## count
+]
+
+.right-column[
+
+Counting the occurence of the given value in an iterable.
+
+  ```python
+  colours = ['red', 'yellow', 'orange', 'red', 'white']
+  random_string = 'thisisarandomstring'
+
+  red_count = `colours.count('red')`
+
+  i_count = `random_string.count("i")`
+
+  print(f'red appears "{red_count}" times')
+  print(f'i appears "{i_count}" times')
+  ```
+Output:
+  ```bash
+  red appears "2" times
+  i appears "3" times
+  ```
+
+Writing count on the list is more elegant than writing `Collections.frequency(colors, "red")` in Java.
+
+]
+
+.footnote[https://docs.python.org/3/library/itertools.html#itertools.cycle]
+
+---
+name: counter
+layout: false
+
+.left-column[
+  ## Counter
+]
+
+.right-column[
+
+While `count` is for specific value in the list.
+
+If you want to know running counts of all values in an iterable,
+
+```python
+  from collections import Counter
+
+  word = 'pneumonoultramicroscopicsilicovolcanoconiosis'
+  print('Word: ', word)
+  c = Counter(word)
+
+  print('counter: ', c)
+  print('top 5: ', c.most_common(5))
+```
+Output:
+
+```bash
+Word:  pneumonoultramicroscopicsilicovolcanoconiosis
+
+counter:  Counter({'o': 9, 'i': 6, 'c': 6, 'n': 4, 's': 4,
+'l': 3, 'p': 2, 'u': 2, 'm': 2, 'r': 2, 'a': 2, 'e': 1, 't': 1, 'v': 1})
+
+top 5:  [('o', 9), ('i', 6), ('c', 6), ('n', 4), ('s', 4)]
+```
+
+]
+
+.footnote[https://docs.python.org/3/library/collections.html#counter-objects]
+
+---
+name: data-classes
+layout: false
+
+.left-column[
+  ## Data Classes
+]
+
+.right-column[
+DataClasses are simply containers of data.
+
+- By creating data classes you can avoid writing some boiler plate code (.__init__(), .__repr__(), and .__eq__() are implemented already).
+- You can make data classes immutable.
+- You can assign default values to fields
+- Type Hints are mandatory, even though they are not enforced in runtime.
+
+### But repeat after me: Type Hints are good and we stick to them!!
+
+### Properties of Data Class:
+
+- **init:** Add .__init__() method? (Default is True.)
+- **repr:** Add .__repr__() method? (Default is True.)
+- **eq:** Add .__eq__() method? (Default is True.)
+- **order:** Add ordering methods? (Default is False.)
+- **frozen:** If True, assigning to fields raise an exception. (Default is False.)
+- **unsafe_hash:** Force the addition of a .__hash__() method? (Default is False.)
+
+ ]
 
 ---
 
-# Agenda
+.left-column[
+  ## Data Classes
+]
 
-1. Introduction
-2. Deep-dive
-3. ...
+.right-column[
+
+```python
+from dataclasses import dataclass
+@dataclass
+class InventoryItem:
+    name: str
+    unit_price: float
+    quantity_on_hand: int = 0
+```
+
+```python
+item_cola_a = InventoryItem(name='cola',
+                            unit_price=20.0,
+                            quantity_on_hand=10)
+item_cola_b = InventoryItem(name='cola',
+                            unit_price=20.0,
+                            quantity_on_hand=10)
+print('Item: ', item_cola_b)
+print('Equal? ', item_cola_a == item_cola_b)
+```
+
+Output:
+
+```bash
+Item: InventoryItem(name='cola', unit_price=20.0, quantity_on_hand=10)
+Equal? True
+```
+]
+.footnote[https://docs.python.org/3/library/dataclasses.html#module-dataclasses]
+
+---
+name: decorators
+
+.left-column[
+  ## Decorators
+]
+
+.right-column[
+
+Functions are just like any other objects in Python. Decorators are Functions
+that takes in a function as input parameter and returns another function.
+
+A working backend in 17 lines of code!! **Mind Blown!!**
+
+```python
+from functools import wraps
+from flask import Flask, request, Response
+
+app = Flask(__name__)
+
+def requires_authentication(f):
+    @wraps(f)
+    def decorated():
+        auth = request.headers.get('Authorization')
+        if not auth or auth != 'Bearer my-secret-api-key':
+            return Response('Not Authorized', 401, {'WWW-Authenticate': 'Bearer realm="Bearer"'})
+        return f()
+
+    return decorated
+
+@app.route('/')
+@requires_authentication
+def hello_world():
+    return 'Hello, World!'
+
+if __name__ == '__main__':
+    app.run()
+```
+]
+---
+
+.left-column[
+  ## Decorators
+]
+
+.right-column[
+
+Output:
+```
+> curl -H 'Authorization: Bearer my-secret-api-key' \
+  http://127.0.0.1:5000/
+
+Hello, World!
+
+> curl http://127.0.0.1:5000/
+
+Not Authorized
+```
+
+]
+---
+name: graceful-shutdown
+
+.left-column[
+  ## Graceful Shutdown
+  ### Python
+]
+
+.right-column[
+If you use [gunicorn](http://docs.gunicorn.org/en/stable/index.html) as a server,
+it will handle the shutdown for you, by default it waits for 30 seconds before it kills an open connection.
+You don’t have to handle the SIGTERM within your application.
+
+```
+> pipenv install gunicorn
+> gunicorn "src:app() --graceful-timeout 10"
+```
+]
+---
+.left-column[
+## Graceful Shutdown
+### Python
+### Java + Tomcat + Spring
+]
+
+.right-column[
+A small peek into graceful shutdown in Java + Tomcat + Spring Framework
+
+```Java
+
+@SpringBootApplication
+public class DemoApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
+    @Bean
+    public GracefulShutdown gracefulShutdown() {
+        return new GracefulShutdown();
+    }
+    @Bean
+    public WebServerFactoryCustomizer tomcatCustomizer(GracefulShutdown gracefulShutdown) {
+        return factory -> {
+            if (factory instanceof TomcatServletWebServerFactory) {
+                ((TomcatServletWebServerFactory) factory)
+                        .addConnectorCustomizers(gracefulShutdown);
+            }
+        };
+    }
+```
+To Be Continued ...
+]
+
 
 ---
 
-# Introduction
+.left-column[
+  ## Graceful Shutdown
+  ### Python
+  ### Java + Tomcat + Spring
+]
 
-    </textarea>
+.right-column[
+```
+private static class GracefulShutdown implements
+TomcatConnectorCustomizer,
+ApplicationListener<ContextClosedEvent> {
+  private static final Logger log = LoggerFactory.getLogger(GracefulShutdown.class);
+  private volatile Connector connector;
+
+  @Override
+  public void customize(Connector connector) {
+      this.connector = connector;
+  }
+  @Override
+  public void onApplicationEvent(ContextClosedEvent event) {
+      log.warn("received ContextClosedEvent");
+      Executor executor = this.connector.getProtocolHandler().getExecutor();
+      if (executor instanceof ThreadPoolExecutor) {
+          try {
+              ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) executor;
+              threadPoolExecutor.shutdown();
+              if (!threadPoolExecutor.awaitTermination(10, TimeUnit.SECONDS)) {
+                  log.warn("Tomcat thread pool did not shut down gracefully within "
+                          + "10 seconds. Proceeding with forceful shutdown");
+              }
+          }
+          catch (InterruptedException ex) {
+              Thread.currentThread().interrupt();
+          }
+      }
+  }
+}
+
+```
+]
+
+
+
+---
+
+template: inverse
+name: zen
+# [The Zen of Python](https://www.python.org/dev/peps/pep-0020/#id3)
+---
+
+```python
+> python3 -m this
+  The Zen of Python, by Tim Peters
+
+  Beautiful is better than ugly.
+  Explicit is better than implicit.
+  Simple is better than complex.
+  Complex is better than complicated.
+  Flat is better than nested.
+  Sparse is better than dense.
+  Readability counts.
+  Special cases aren't special enough to break the rules.
+  Although practicality beats purity.
+  Errors should never pass silently.
+  Unless explicitly silenced.
+  In the face of ambiguity, refuse the temptation to guess.
+  There should be one-- and preferably only one --obvious way to do it.
+  Although that way may not be obvious at first unless you're Dutch.
+  Now is better than never.
+  Although never is often better than *right* now.
+  If the implementation is hard to explain, it's a bad idea.
+  If the implementation is easy to explain, it may be a good idea.
+  Namespaces are one honking great idea -- let's do more of those!
+```
+
+---
+template: inverse
+name: thank-you
+#Thank you
+.footnote[Slideshow created with [remarkjs](https://remarkjs.com)]
+---
+
+</textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
     </script>
     <script>
-      var slideshow = remark.create();
+      var hljs = remark.highlighter.engine;
     </script>
+    <script>
+      var slideshow = remark.create({
+        highlightLanguage: 'python',
+        highlightStyle: 'darcula',
+        highlightLines: true,
+        highlightSpans: true
+      });
+    </script>
+
   </body>
 </html>
