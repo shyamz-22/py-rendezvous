@@ -135,7 +135,7 @@ name: inverse
 layout: true
 class: center, middle, inverse
 ---
-#In my Rendezvous with Python
+#My Rendezvous with Python
 ---
 name: cycle
 layout: false
@@ -150,12 +150,16 @@ Make an iterator returning elements from the iterable and saving a copy of each.
 When the iterable is exhausted, return elements from the saved copy. Repeats indefinitely
 
 ```python
-clocks = ['🕛', '🕑', '🕓', '🕕', '🕗', '🕘', '🕚']
-`clock = cycle(clocks)`
-msg = 'Loading... '
-for i in range(10):
-    print('\r' + msg + next(clock), end='')
-    sleep(1)
+ clocks = ['🕛', '🕑', '🕓', '🕕', '🕗', '🕘', '🕚']
+
+ `clock = cycle(clocks)`
+
+  msg = 'Loading... '
+
+  for i in range(10):
+     print('\r' + msg + next(clock), end='')
+     sleep(1)
+
 ```
 
 Output:
@@ -252,27 +256,18 @@ layout: false
 ]
 
 .right-column[
-DataClasses are simply containers of data.
+DataClasses are simply containers of data. They are normal Python classes with
+some boilerplate code implemented already.
 
-- By creating data classes you can avoid writing some boiler plate code (.__init__(), .__repr__(), and .__eq__() are implemented already).
 - You can make data classes immutable.
-- You can assign default values to fields
 - Type Hints are mandatory, even though they are not enforced in runtime.
 
 ### But repeat after me: Type Hints are good and we stick to them!!
 
-### Properties of Data Class:
-
-- **init:** Add .__init__() method? (Default is True.)
-- **repr:** Add .__repr__() method? (Default is True.)
-- **eq:** Add .__eq__() method? (Default is True.)
-- **order:** Add ordering methods? (Default is False.)
-- **frozen:** If True, assigning to fields raise an exception. (Default is False.)
-- **unsafe_hash:** Force the addition of a .__hash__() method? (Default is False.)
-
  ]
 ???
-
+- dunder - Double under
+-  (.__init__(), .__repr__(), and .__eq__() are implemented already).
 - Emphasize on the immutability
 ---
 
@@ -284,7 +279,12 @@ DataClasses are simply containers of data.
 
 ```python
 from dataclasses import dataclass
-@dataclass
+@dataclass(init=True,
+           repr=True,
+           eq=True,
+           order=False,
+           frozen=True, # default is false
+           unsafe_hash=False)
 class InventoryItem:
     name: str
     unit_price: float
@@ -399,13 +399,60 @@ You don’t have to handle the SIGTERM within your application.
 ```
 ]
 ???
+The SIGTERM signal is a generic signal used to cause program termination.
+Unlike SIGKILL, this signal can be blocked, handled, and ignored.
+It is the normal way to politely ask a program to terminate.
 
-Talk about SIGKILL and SIGTERM,
+Talk about SIGTERM,
 CF timeout 10 seconds.
 ---
 .left-column[
 ## Graceful Shutdown
 ### Python
+### Go
+]
+
+.right-column[
+
+```go
+func main() {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", random)
+
+	server := http.Server{
+		Addr:    ":8080",
+		Handler: mux,
+	}
+
+	go func() {
+		server.ListenAndServe()
+	}()
+
+	// here the magic happens
+	osSignals := make(chan os.Signal, 1)
+	// subscribe to SIGTERM
+	signal.Notify(osSignals, syscall.SIGTERM)
+
+	select {
+	case <-osSignals:
+		log.Print("caught signal, shutting down")
+
+	  // create timeout
+		const timeout = 10 * time.Second
+		ctx, cancel := context.WithTimeout(context.Background(), timeout)
+		defer cancel()
+
+		// wait before dying, context will release resources
+		server.Shutdown(ctx)
+	}
+}
+```
+]
+---
+.left-column[
+## Graceful Shutdown
+### Python
+### Go
 ### Java + Tomcat + Spring
 ]
 
@@ -436,12 +483,12 @@ public class DemoApplication {
 To Be Continued ...
 ]
 
-
 ---
 
 .left-column[
   ## Graceful Shutdown
   ### Python
+  ### Go
   ### Java + Tomcat + Spring
 ]
 
@@ -450,7 +497,8 @@ To Be Continued ...
 private static class GracefulShutdown implements
 TomcatConnectorCustomizer,
 ApplicationListener<ContextClosedEvent> {
-  private static final Logger log = LoggerFactory.getLogger(GracefulShutdown.class);
+  private static final Logger log
+     = LoggerFactory.getLogger(GracefulShutdown.class);
   private volatile Connector connector;
 
   @Override
@@ -520,7 +568,8 @@ A collection of 19 "guiding principles" that influence the design of the Python 
 template: inverse
 name: thank-you
 #Thank you
-.footnote[Slideshow created with [remarkjs](https://remarkjs.com)]
+Content of the slides @ https://github.com/shyamz-22/py-rendezvous/
+.footnote[Slides by [remarkjs](https://remarkjs.com)]
 ---
 
 </textarea>

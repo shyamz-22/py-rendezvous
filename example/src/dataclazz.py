@@ -1,9 +1,13 @@
 from dataclasses import dataclass
 
 
-@dataclass
+@dataclass(init=True,
+           repr=True,
+           eq=True,
+           order=False,
+           frozen=True, # default is false
+           unsafe_hash=False)
 class InventoryItem:
-    '''Class for keeping track of an item in inventory.'''
     name: str
     unit_price: float
     quantity_on_hand: int = 0
