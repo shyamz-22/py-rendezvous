@@ -354,7 +354,9 @@ def requires_authentication(f):
     def decorated():
         auth = request.headers.get('Authorization')
         if not auth or auth != 'Bearer my-secret-api-key':
-            return Response('Not Authorized', 401, {'WWW-Authenticate': 'Bearer realm="Bearer"'})
+            return Response('Not Authorized',
+                             401,
+                             {'WWW-Authenticate': 'Bearer realm="Bearer"'})
         return f()
 
     return decorated
