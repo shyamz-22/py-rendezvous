@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Title</title>
+    <title>My-Rendezvous-with-Python</title>
     <meta charset="utf-8">
     <style>
       @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
@@ -159,8 +159,7 @@ layout: false
 
 .right-column[
 
-Make an iterator returning elements from the iterable and saving a copy of each.
-When the iterable is exhausted, return elements from the saved copy. Repeats indefinitely
+Return elements from the iterable until it is exhausted. Then repeat the sequence indefinitely.
 
 ```python
  clocks = ['🕛', '🕑', '🕓', '🕕', '🕗', '🕘', '🕚']
@@ -338,10 +337,7 @@ name: decorators
 
 .right-column[
 
-Functions are just like any other objects in Python. Decorators are Functions
-that takes in a function as input parameter and returns another function.
-
-A working backend in 17 lines of code!! **Mind Blown!!**
+Decorators wraps a funtion, Modifying the behavior
 
 ```python
 from functools import wraps
@@ -370,6 +366,14 @@ if __name__ == '__main__':
     app.run()
 ```
 ]
+
+???
+Functions are just like any other objects in Python. Decorators are Functions
+that takes in a function as input parameter and returns another function.
+
+Makes code readable, at the same time the implementation is explicit. I
+like that I could do this that is not part of a framework.
+
 ---
 
 .left-column[
@@ -390,15 +394,31 @@ Not Authorized
 ```
 ]
 .footnote[https://realpython.com/primer-on-python-decorators/]
-???
-Makes code readable, at the same time the implementation is explicit. I
-like that I could do this that is not part of a framework.
-
 ---
 name: graceful-shutdown
 
 .left-column[
   ## Graceful Shutdown
+  ### Why
+]
+
+.right-column[
+When application receives a `SIGTERM`,
+
+- Server should stop receiving new requests
+- Finish processing the ongoing requests
+- Release any resources
+- Exit
+
+]
+???
+The SIGTERM signal is a generic signal used to cause program termination.
+Unlike SIGKILL, this signal can be blocked, handled, and ignored.
+It is the normal way to politely ask a program to terminate.
+---
+.left-column[
+  ## Graceful Shutdown
+  ### Why
   ### Python
 ]
 
@@ -412,16 +432,10 @@ You don’t have to handle the SIGTERM within your application.
 > gunicorn "src:app() --graceful-timeout 10"
 ```
 ]
-???
-The SIGTERM signal is a generic signal used to cause program termination.
-Unlike SIGKILL, this signal can be blocked, handled, and ignored.
-It is the normal way to politely ask a program to terminate.
-
-Talk about SIGTERM,
-CF timeout 10 seconds.
 ---
 .left-column[
 ## Graceful Shutdown
+### Why
 ### Python
 ### Go
 ]
@@ -465,6 +479,7 @@ func main() {
 ---
 .left-column[
 ## Graceful Shutdown
+### Why
 ### Python
 ### Go
 ### Java + Tomcat + Spring
@@ -501,6 +516,7 @@ To Be Continued ...
 
 .left-column[
   ## Graceful Shutdown
+  ### Why
   ### Python
   ### Go
   ### Java + Tomcat + Spring
@@ -581,12 +597,13 @@ A collection of 19 "guiding principles" that influence the design of the Python 
 ---
 template: inverse
 name: thank-you
-#Thank you
+
+#Thank you!
 ![slide-qr](http://www.unitag.io/qreator/generate?crs=xnjFkEn%252FP85fCPDXJ%252FXXKg5g6yQi7H4qzUlRVUntU035Re8CX7iHj071HbqF%252BCfYW0fkByoDtlWAYEP%252FkF2diixRYyDowsUP0nhsYk5M9KonCqrlzbM8ruK5PB26py9xISb2vHROft2MVGIGmlYJQQ%253D%253D&crd=fhOysE0g3Bah%252BuqXA7NPQyXNF4fguFnOjT8EiTbKC9p%252Fn4fiMe%252BSdIyvytr9yq4zeovFZKwOa8xAMpNZtBAv2kFZiZn64DgG47x3J8Wpmwc%253D)
 
-https://shyamz-22.github.io/py-rendezvous/
-.footnote[Slides by [remarkjs](https://remarkjs.com)]
----
+https://shyamz-22.github.io/py-rendezvous
+
+Slides By [Remark](https://remarkjs.com)
 
 </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
